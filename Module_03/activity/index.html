@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Module 03 - Activity</title>
+	
+</head>
+<body>
+    <p>The reverse of Christina Hargest is:  <span id="answer"></span></p>
+	
+	<script>
+		var name = "Christina Hargest";
+		
+		
+		function reverseString(name) {
+		
+			return name.split('').reverse().join('');
+		}
+		
+		var result = reverseString(name);
+		
+		document.getElementById("answer").innerHTML = result;		
+		console.log("The reversal of " + name + " is:  " + result);
+	</script>
+</body>
+</html>
