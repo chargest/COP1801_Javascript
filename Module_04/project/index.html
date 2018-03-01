@@ -27,15 +27,18 @@
 	<script>					  
 		function myFunction() {
 			var flavor = document.getElementById("textinput-1").value;		
-			
-			if (flavor == 'chocolate') {
+			var results;
+						
+			if (flavor == '') {
+				alert("Please enter an icecream flavor!");
+			} else if (flavor == 'chocolate') {
 				results = "Congratulations, " + flavor + " is the most favorite flavor: ";
 			} else if (flavor == 'vanilla') {
-				results = "Oh, " + flavor + " is a  boring flavor: ";
+				results = "Oh, I think " + flavor + " is a  boring flavor: ";
 			} else {
 				results = "Well " + flavor + " is an interesting flavor: ";
-			}
-						
+			}			
+			
 			document.getElementById("stringResults").innerHTML = results;
 		}
     </script>
