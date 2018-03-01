@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Module 04 - Activity</title>
+	
+</head>
+<body>
+    <p>The ice cream flavors are:  <span id="iceCream"></span></p>
+	
+	<script>
+		var flavors = ["Marmalade", "Chocolate", "Butterfinger"];
+		
+		
+		function myFunction(flavors) {
+			var hour = new Date().getHours();
+					
+			if (hour < 12) {
+				iceCreamFlavors = flavors.sort();		
+			} else if (hour < 17){
+				iceCreamFlavors = flavors.sort();
+			} else {
+				iceCreamFlavors = flavors.reverse();
+			}
+			
+			return iceCreamFlavors;
+			
+		}		
+		document.getElementById("iceCream").innerHTML = myFunction(flavors);
+		
+		console.log("The reversal of ice cream flavors is: " + flavors.reverse());
+	</script>
+</body>
+</html>
