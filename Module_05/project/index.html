@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+	<div data-role="page">
+		<div data-role="header">
+				<h1>COP1801 Javascript Module 04 Course Project</h1>
+		</div>
+		<div data-role="content">			
+			<div class="ui-field-contain">
+				<label for="textinput-1">Enter your favorite ice cream flavor:</label>
+				<input type="text" name="textinput-1" id="textinput-1" placeholder="Text input" value="">
+			</div>
+			<p>Click on "Display my entry" to display the string value.</p>
+			<button class="ui-btn ui-btn-inline" onclick="myFunction()">Display my entry</button>
+			
+			<p>String value:  <span id="stringResults"></span></p>
+		</div>
+		<div data-role="footer">
+			<h4>&copy 2018 Christina Hargest</h4>
+		</div>
+	</div>
+	<script>					  
+		function myFunction() {
+			var flavor = document.getElementById("textinput-1").value;		
+			var results;
+						
+			if (flavor == '') {
+				alert("Please enter an icecream flavor!");
+			} else if (flavor == 'chocolate') {
+				results = "Congratulations, " + flavor + " is the most favorite flavor: ";
+			} else if (flavor == 'vanilla') {
+				results = "Oh, I think " + flavor + " is a  boring flavor: ";
+			} else {
+				results = "Well " + flavor + " is an interesting flavor: ";
+			}			
+			
+			document.getElementById("stringResults").innerHTML = results;
+		}
+    </script>
+</body>
+</html>
+
