@@ -1,47 +1,144 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<meta charset="utf-8">
+	<title>Module 05 - Project</title>
+	<style>
+		h3 {
+			text-align: center;
+		}
+		form {
+			margin: 0 auto;
+			width: 600px;
+			padding: 1em;
+			border: 1px solid #ccc;
+			border-radius: 1em;
+	    }
+		form div + div {
+			margin-top: 1em;
+		}
+		label {
+			display:inline-block;
+			width: 90px;
+			text-align: right;
+		}
+		input {
+			width: 300px;
+			box-sizing: border-box;
+			border: 1px solid #999;
+		}
+		input:focus {
+			border-color: #000;
+		}
+		.centerThis {
+			text-align: center;
+		}
+		#myFunction {
+			text-align: center;
+			margin:auto;
+		}
+		table,td {
+			border: 1px solid black;
+		}
+	</style>
 </head>
 <body>
-	<div data-role="page">
-		<div data-role="header">
-				<h1>COP1801 Javascript Module 04 Course Project</h1>
+    <h3>Adding Forms and Storing Values</h3>
+	
+	<form id="myForm" action="submitMyForm.php">
+		<div>
+			<label for="first name">First name:</label>
+			<input required type="text" name="first name" placeholder="first name">
 		</div>
-		<div data-role="content">			
-			<div class="ui-field-contain">
-				<label for="textinput-1">Enter your favorite ice cream flavor:</label>
-				<input type="text" name="textinput-1" id="textinput-1" placeholder="Text input" value="">
-			</div>
-			<p>Click on "Display my entry" to display the string value.</p>
-			<button class="ui-btn ui-btn-inline" onclick="myFunction()">Display my entry</button>
-			
-			<p>String value:  <span id="stringResults"></span></p>
+		<div>
+			<label for="last name">Last name:</label>
+			<input required type="text" name="last name" placeholder="last name">
 		</div>
-		<div data-role="footer">
-			<h4>&copy 2018 Christina Hargest</h4>
+		<div>
+			<label for="address">Street Address:</label>
+			<input required type="text" name="address" placeholder="address">
 		</div>
+		<div>
+			<label for="city">City:</label>
+			<input required type="text" name="city" placeholder="city">
+		</div>
+		<div>
+			<label for="state">State:</label>
+			<input required type="text" name="state" placeholder="state">
+		</div>
+		<div>
+			<label for="zipcode">Zipcode:</label>
+			<input required type="text" name="zipcode" placeholder="zipcode">
+		</div>
+		
+		<div class="button">  
+			<button type="submit">Submit</button>
+		</div>
+	
+	<p>Click the submit button to ensure all fields have been filled out.  You will get an error saying the (action) file was not found.  Please click the back button to return to the form</p>
+	
+	</form>
+	
+	<p class="centerThis">Click the "Display Values" button to get the values (logged to the console) that were submitted in the form</p>
+	
+	<div id="myFunction">
+		<button  onclick="myFunction()">Display values</button>
 	</div>
-	<script>					  
+	
+	<script>
 		function myFunction() {
-			var flavor = document.getElementById("textinput-1").value;		
-			var results;
-						
-			if (flavor == '') {
-				alert("Please enter an icecream flavor!");
-			} else if (flavor == 'chocolate') {
-				results = "Congratulations, " + flavor + " is the most favorite flavor: ";
-			} else if (flavor == 'vanilla') {
-				results = "Oh, I think " + flavor + " is a  boring flavor: ";
-			} else {
-				results = "Well " + flavor + " is an interesting flavor: ";
-			}			
+								
+			var count = 0;
+			var str;
+			var inputs = document.getElementById("myForm").elements;
 			
-			document.getElementById("stringResults").innerHTML = results;
+			// Create the table
+			var xTable = document.createElement("table");
+			xTable.setAttribute("id","myTable");
+			document.body.appendChild(xTable);
+			
+			// Check for blank form entries and display error message to user
+            for (i=0; i < inputs.length-1; i++) {				
+				if (inputs[i].value == '') {
+					alert("Please fill out the form field: " + inputs[i].name);
+					count++;
+					// break added so that each empty field isn't looped over, 
+					// only the first empty field
+					break;
+					
+				
+				}				
+			}
+	
+			if (count == 0) {			
+				// Build the table cells
+				for (i=0; i < inputs.length-1; i++) {
+											
+					// Retrieve the field names and values for the first row
+					str = inputs[i].name;
+					str += ": " + inputs[i].value;
+					console.log(str);
+					
+					// Create a table row
+					var xRow = document.createElement("tr");
+					// Add row to table
+					xTable.appendChild(xRow);
+					
+					// Create cell for field names and append to row
+					var firstTd = document.createElement("td");
+					var firstCell = document.createTextNode(inputs[i].name);
+					firstTd.appendChild(firstCell);
+					xRow.appendChild(firstTd);
+					
+					
+					// Create cell for form values and append to table row
+					var secondTd = document.createElement("td");
+					var secondCell = document.createTextNode(inputs[i].value);
+					secondTd.appendChild(secondCell);
+					xRow.appendChild(secondTd);					
+				}	
+			}
 		}
-    </script>
+	</script>
 </body>
 </html>
-
