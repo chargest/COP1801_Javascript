@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Module 05 - Project</title>
+	<style>
+		h3 {
+			text-align: center;
+		}
+		form {
+			margin: 0 auto;
+			width: 600px;
+			padding: 1em;
+			border: 1px solid #ccc;
+			border-radius: 1em;
+	    }
+		form div + div {
+			margin-top: 1em;
+		}
+		label {
+			display:inline-block;
+			width: 90px;
+			text-align: right;
+		}
+		input {
+			width: 300px;
+			box-sizing: border-box;
+			border: 1px solid #999;
+		}
+		input:focus {
+			border-color: #000;
+		}
+		.centerThis {
+			text-align: center;
+		}
+		#myFunction {
+			text-align: center;
+			margin:auto;
+		}
+		table {
+			text-align: center;
+			margin:auto;
+			margin-top: 20px;
+		}
+		table,td {
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+    <h3 >Adding Forms and Storing Values</h3>
+	
+	<form id="myForm" action="submitMyForm.php">
+		<div>
+			<label for="first name">First name:</label>
+			<input required type="text" name="First Name" placeholder="first name">
+		</div>
+		<div>
+			<label for="last name">Last name:</label>
+			<input required type="text" name="Last Name" placeholder="last name">
+		</div>
+		<div>
+			<label for="address">Street Address:</label>
+			<input required type="text" name="Address" placeholder="address">
+		</div>
+		<div>
+			<label for="city">City:</label>
+			<input required type="text" name="City" placeholder="city">
+		</div>
+		<div>
+			<label for="state">State:</label>
+			<input required type="text" name="State" placeholder="state">
+		</div>
+		<div>
+			<label for="zipcode">Zipcode:</label>
+			<input required type="text" name="Zipcode" placeholder="zipcode">
+		</div>
+		
+		<div class="button">  
+			<button type="submit">Submit</button>
+		</div>
+	
+	<p>Click the submit button to ensure all fields have been filled out.  You will get an error saying the (action) file was not found.  Please click the back button to return to the form</p>
+	
+	</form>
+	
+	<p class="centerThis">Click the "Display Values" button to get the values (logged to the console) that were submitted in the form</p>
+	
+	<div id="myFunction">
+		<button  onclick="myFunction()">Display values</button>
+	</div>
+	
+	<script>
+		// get all of the labels and assign mouseover and mouseout events
+		// mouseover event changes labels to red and bold; mouseout event 
+		// changes text back to black and unbolded
+		var allLabels = document.getElementsByTagName("label");
+		for ( var i = 0; i < allLabels.length; i++) {
+			allLabels[i].addEventListener('mouseover',function() {
+				this.style.color="red";
+				this.style.fontWeight="bold";
+			}, false);
+			/*
+			allLabels[i].addEventListener('mouseout',function() {
+				this.style.color="black";
+				this.style.fontWeight="normal";
+			}, false);
+			*/
+		}
+		
+		
+	
+		function myFunction() {
+								
+			var count = 0;
+			var str;
+			var inputs = document.getElementById("myForm").elements;
+			var td;
+			var cell;
+			var xRow;
+			
+			// Create the table
+			var xTable = document.createElement("table");
+			xTable.setAttribute("id","myTable");
+			document.body.appendChild(xTable);
+			
+			// Check for blank form entries and display error message to user
+            for (i=0; i < inputs.length-1; i++) {				
+				if (inputs[i].value == '') {
+					alert("Please fill out the form field: " + inputs[i].name);
+					count++;
+					// break added so that each empty field isn't looped over, 
+					// only the first empty field
+					break;									
+				}				
+			}
+	
+			if (count == 0) {			
+				// Build the header row
+				xRow = document.createElement("tr");
+				// Add row to table
+				xTable.appendChild(xRow);
+					
+				for (i=0; i < inputs.length-1; i++) {
+											
+					// Retrieve the field names and values for the first row
+					str = inputs[i].name;
+					str += ": " + inputs[i].value;
+					console.log(str);										
+					
+					// Create cell for field names and append to row
+					td = document.createElement("td");
+					cell = document.createTextNode(inputs[i].name);
+					td.appendChild(cell);
+					xRow.appendChild(td);					
+				}	
+				
+				// Build the value row
+				xRow = document.createElement("tr");
+				// Add row to table
+				xTable.appendChild(xRow);
+				
+				// Build the table cells
+				for (i=0; i < inputs.length-1; i++) {
+				
+					// Create cell for form values and append to table row
+					td = document.createElement("td");
+					cell = document.createTextNode(inputs[i].value);
+					td.appendChild(cell);
+					xRow.appendChild(td);					
+				}
+				
+			}
+		}
+	</script>
+</body>
+</html>

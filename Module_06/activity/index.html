@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Module 06 - Activity</title>
+	<style>
+		h3 {
+			text-align: center;
+		}
+		form {
+			margin: 0 auto;
+			width: 600px;
+			padding: 1em;
+			border: 1px solid #ccc;
+			border-radius: 1em;
+	    }
+		form div + div {
+			margin-top: 1em;
+		}
+		label {
+			display:inline-block;
+			width: 90px;
+			text-align: right;
+		}
+		input {
+			width: 300px;
+			box-sizing: border-box;
+			border: 1px solid #999;
+		}
+		input:focus {
+			border-color: #000;
+		}
+		.centerThis {
+			text-align: center;
+		}
+		#myFunction {
+			text-align: center;
+			margin:auto;
+		}
+	</style>
+</head>
+<body>
+    <h3>Performing Calculations</h3>
+	<p class="centerThis">Enter the length and the width of a room to calculate the area</p>
+	<form id="myForm" action="submitMyForm.php">
+		<div>
+			<label for="length">Enter length:</label>
+			<input required type="text" name="room length" placeholder="length">
+		</div>
+		<div>
+			<label for="width">Enter width:</label>
+			<input required type="text" name="room width" placeholder="width">
+		</div>
+	
+	</form>
+	
+	<p class="centerThis">Click the "Display Values" button to get the area of the room</p>
+	
+	<div id="myFunction">
+		<button  onclick="myFunction()">Display values</button>
+	</div>
+	<br>
+	<br>
+	<p id="area" class="centerThis"> </p>
+	<script>
+		function myFunction() {
+		
+			var str;
+			var inputs = document.getElementById("myForm").elements;
+			var count = 0;
+			var length1 = 0;
+			var width = 0;
+			var area = 0;
+			
+			// Check for blank form entries and display error message to user
+            for (i=0; i < inputs.length; i++) {		
+				if (inputs[i].value == '') {
+					alert("Please fill out the form field: " + inputs[i].name);
+					count++;
+					break;
+					// break added so that each empty field isn't looped over, 
+					// only the first empty field
+												
+				} else if (isNaN(inputs[i].value)) {
+					alert("Please input a number for " + inputs[i].name);
+					count++;
+					break;
+				}
+				
+			}
+			
+			// if the form fields have all been filled out
+			if (count == 0) {
+				var form = document.getElementById("myForm");
+				length1 = form.elements["room length"].value;
+				width = form.elements["room width"].value;
+				
+				
+				area = length1 * width;
+				
+				var element = document.getElementById("area");
+				element.innerHTML = "The area of the room is: "  + area;
+			}
+		}
+	</script>
+</body>
+</html>
